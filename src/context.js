@@ -4,9 +4,17 @@ import React, { useState, useContext } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const bindCardData = (data) => {};
+  const [selectedCountry, setSelectedCountry] = useState("");
 
-  return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
+  const onDrpChange = (e) => {
+    setSelectedCountry(e.value);
+  };
+
+  return (
+    <AppContext.Provider value={{ onDrpChange, selectedCountry }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export const useGlobalContext = () => {

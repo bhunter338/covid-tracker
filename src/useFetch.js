@@ -5,15 +5,11 @@ const useFetch = (url) => {
   const [error, setError] = useState({ show: false, msg: "" });
   const [data, setData] = useState(null);
 
-  const fetchMovies = async (url) => {
-    console.log("url:" + url);
+  const fetchData = async (url) => {
     setIsLoading(true);
     try {
       const response = await fetch(url);
       const data = await response.json();
-
-      console.log(data);
-      console.log(response.ok);
 
       if (!response.ok) {
         setError({ show: true, msg: data.Error });
@@ -29,7 +25,7 @@ const useFetch = (url) => {
   };
 
   useEffect(() => {
-    fetchMovies(url);
+    fetchData(url);
   }, [url]);
   return { isLoading, error, data };
 };

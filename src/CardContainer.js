@@ -4,16 +4,18 @@ import cardContents from "./cardContents";
 import { useGlobalContext } from "./context";
 import useFetch from "./useFetch";
 
-const url = "https://covid19.mathdro.id/api";
 const CardContainer = () => {
-  const {} = useGlobalContext();
+  const { selectedCountry } = useGlobalContext();
+  const url =
+    selectedCountry === "global" || selectedCountry === ""
+      ? "https://covid19.mathdro.id/api"
+      : `https://covid19.mathdro.id/api/countries/${selectedCountry}`;
+
   const { isLoading, error, data } = useFetch(url);
   const [contents, setContents] = useState([]);
+  console.log(url);
 
   useEffect(() => {
-    console.log(data);
-    console.log("isloading" + isLoading);
-    console.log(error);
     if (!isLoading) {
       var newContents = cardContents.map((item) => {
         switch (item.id) {
@@ -27,21 +29,18 @@ const CardContainer = () => {
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };
-            break;
           case 6:
             var num = data.deaths.value
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };
-            break;
           default:
             return { ...item };
         }
       });
-      console.log(newContents);
       setContents(newContents);
     }
-  }, [isLoading]);
+  }, [isLoading, selectedCountry]);
 
   var options = {
     weekday: "short",
@@ -51,7 +50,7 @@ const CardContainer = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <h1>Loading...</h1>;
   }
   return (
     <div className="cards-container">
