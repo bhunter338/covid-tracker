@@ -5,32 +5,35 @@ import { useGlobalContext } from "./context";
 import useFetch from "./useFetch";
 
 const CardContainer = () => {
-  const { selectedCountry } = useGlobalContext();
-  const url =
-    selectedCountry === "global" || selectedCountry === ""
-      ? "https://covid19.mathdro.id/api"
-      : `https://covid19.mathdro.id/api/countries/${selectedCountry}`;
+  const { fetchedData, isLoading } = useGlobalContext();
+  console.log(isLoading, fetchedData);
+  // const { isLoading, data } = fetchedData;
+  // const url =
+  //   selectedCountry === "global" || selectedCountry === ""
+  //     ? "https://covid19.mathdro.id/api"
+  //     : `https://covid19.mathdro.id/api/countries/${selectedCountry}`;
 
-  const { isLoading, error, data } = useFetch(url);
+  // const { isLoading, error, data } = useFetch(url);
   const [contents, setContents] = useState([]);
-  console.log(url);
 
   useEffect(() => {
-    if (!isLoading) {
+    console.log(isLoading);
+    if (!isLoading && typeof isLoading !== "undefined") {
+      console.log("inside");
       var newContents = cardContents.map((item) => {
         switch (item.id) {
           case 4:
-            var num = data.confirmed.value
+            var num = fetchedData.confirmed.value
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };
           case 5:
-            var num = data.recovered.value
+            var num = fetchedData.recovered.value
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };
           case 6:
-            var num = data.deaths.value
+            var num = fetchedData.deaths.value
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };
@@ -40,7 +43,7 @@ const CardContainer = () => {
       });
       setContents(newContents);
     }
-  }, [isLoading, selectedCountry]);
+  }, [isLoading /*, selectedCountry*/]);
 
   var options = {
     weekday: "short",
