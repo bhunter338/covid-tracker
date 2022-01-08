@@ -6,7 +6,6 @@ import useFetch from "./useFetch";
 
 const CardContainer = () => {
   const { fetchedData, isLoading } = useGlobalContext();
-  console.log(isLoading, fetchedData);
   // const { isLoading, data } = fetchedData;
   // const url =
   //   selectedCountry === "global" || selectedCountry === ""
@@ -17,9 +16,7 @@ const CardContainer = () => {
   const [contents, setContents] = useState([]);
 
   useEffect(() => {
-    console.log(isLoading);
     if (!isLoading && typeof isLoading !== "undefined") {
-      console.log("inside");
       var newContents = cardContents.map((item) => {
         switch (item.id) {
           case 4:

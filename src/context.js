@@ -19,14 +19,11 @@ const AppProvider = ({ children }) => {
   }, [selectedCountry]);
 
   const FetchApi = async (url) => {
-    console.log("fetchApi");
-
     setIsLoading(true);
 
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log(isLoading);
     setfetchedData(data);
     setIsLoading(false);
   };
@@ -34,7 +31,6 @@ const AppProvider = ({ children }) => {
   const onDrpChange = (e) => {
     setSelectedCountry(e.value === undefined ? e.label : e.value);
   };
-  console.log(fetchedData);
   return (
     <AppContext.Provider
       value={{ onDrpChange, selectedCountry, fetchedData, isLoading }}
