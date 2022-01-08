@@ -3,25 +3,26 @@ import Select from "react-select";
 import useFetch from "./useFetch";
 import { useGlobalContext } from "./context";
 
-const countriesUrl = "https://covid19.mathdro.id/api/countries";
+// const countriesUrl = "https://covid19.mathdro.id/api/countries";
 
 const TitleBar = () => {
-  const { onDrpChange } = useGlobalContext();
+  const { onDrpChange, fetchedCountryData, isCountriesLoading } =
+    useGlobalContext();
   const defaultOption = { value: "global", label: "Global" };
-  const { isLoading, error, data } = useFetch(countriesUrl);
+  // const { isLoading, error, data } = useFetch(countriesUrl);
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    if (!isLoading) {
-      const newCountries = data.countries.map((item) => {
+    if (!isCountriesLoading) {
+      const newCountries = fetchedCountryData.countries.map((item) => {
         return { value: item.iso2, label: item.name };
       });
       newCountries.unshift({ value: "global", label: "Global" });
       setCountries(newCountries);
     }
-  }, [isLoading]);
+  }, [isCountriesLoading]);
 
-  if (isLoading) {
+  if (isCountriesLoading) {
     return <h1>Loading...</h1>;
   }
 
