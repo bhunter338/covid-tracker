@@ -13,19 +13,23 @@ const AppProvider = ({ children }) => {
   const [fetchedDailyData, setfetchedDailyData] = useState({});
   const [isDailyLoading, setIsDailyLoading] = useState(true);
 
+  // const url =
+  //   selectedCountry === "World" || selectedCountry === ""
+  //     ? "https://covid19.mathdro.id/api"
+  //     : `https://covid19.mathdro.id/api/countries/${selectedCountry}`;
   const url =
-    selectedCountry === "global" || selectedCountry === ""
-      ? "https://covid19.mathdro.id/api"
-      : `https://covid19.mathdro.id/api/countries/${selectedCountry}`;
+    "https://covid19dataapi.herokuapp.com/api/covidData/" +
+    (selectedCountry === "" ? "World" : selectedCountry);
 
-  const countriesUrl = "https://covid19.mathdro.id/api/countries";
+  const countriesUrl =
+    "https://covid19dataapi.herokuapp.com/api/covidData/countries";
 
   const dailyUrl = "https://covid19.mathdro.id/api/daily";
 
   useEffect(() => {
     FetchApi(url);
 
-    if (selectedCountry === "global" || selectedCountry === "") {
+    if (selectedCountry === "World" || selectedCountry === "") {
       FetchDaily(dailyUrl);
     }
   }, [selectedCountry]);
@@ -36,7 +40,7 @@ const AppProvider = ({ children }) => {
 
   const FetchApi = async (url) => {
     setIsLoading(true);
-
+    console.log("url " + url);
     const response = await fetch(url);
     const data = await response.json();
 

@@ -19,18 +19,33 @@ const CardContainer = () => {
     if (!isLoading && typeof isLoading !== "undefined") {
       var newContents = cardContents.map((item) => {
         switch (item.id) {
+          case 1:
+            var num = fetchedData.totalConfirmed
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return { ...item, number: num };
+          case 2:
+            var num = fetchedData.totalRecovered
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return { ...item, number: num };
+          case 3:
+            var num = fetchedData.totalDeaths
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return { ...item, number: num };
           case 4:
-            var num = fetchedData.confirmed.value
+            var num = fetchedData.activeCases
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };
           case 5:
-            var num = fetchedData.recovered.value
+            var num = fetchedData.serious
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };
           case 6:
-            var num = fetchedData.deaths.value
+            var num = fetchedData.casesPer1MPopulation
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return { ...item, number: num };

@@ -5,8 +5,6 @@ import { Chart } from "react-chartjs-2";
 import { useGlobalContext } from "./context";
 import useFetch from "./useFetch";
 
-const dailyUrl = "https://covid19.mathdro.id/api/daily";
-
 const Graph = () => {
   const {
     fetchedData,
@@ -18,9 +16,9 @@ const Graph = () => {
   // const [chartData, setChartData] = useState([]);
   console.log(fetchedDailyData, isDailyLoading);
   const data = [
-    { name: "Infected", value: !isLoading ? fetchedData.confirmed.value : 0 },
-    { name: "Recovered", value: !isLoading ? fetchedData.recovered.value : 0 },
-    { name: "Deaths", value: !isLoading ? fetchedData.deaths.value : 0 },
+    { name: "Infected", value: !isLoading ? fetchedData.totalConfirmed : 0 },
+    { name: "Recovered", value: !isLoading ? fetchedData.totalRecovered : 0 },
+    { name: "Deaths", value: !isLoading ? fetchedData.totalDeaths : 0 },
   ];
   var lineData = {};
 
@@ -35,7 +33,7 @@ const Graph = () => {
   };
 
   if (
-    (selectedCountry === "global" || selectedCountry === "") &&
+    (selectedCountry === "World" || selectedCountry === "") &&
     !isDailyLoading
   ) {
     lineData = {
@@ -61,7 +59,7 @@ const Graph = () => {
 
   if (isLoading || isDailyLoading) {
     return <h1>Loading...</h1>;
-  } else if (!(selectedCountry === "global" || selectedCountry === "")) {
+  } else if (!(selectedCountry === "World" || selectedCountry === "")) {
     return (
       <div className="graph">
         <Bar

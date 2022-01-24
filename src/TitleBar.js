@@ -8,16 +8,17 @@ import { useGlobalContext } from "./context";
 const TitleBar = () => {
   const { onDrpChange, fetchedCountryData, isCountriesLoading } =
     useGlobalContext();
-  const defaultOption = { value: "global", label: "Global" };
+  const defaultOption = { value: "World", label: "World" };
   // const { isLoading, error, data } = useFetch(countriesUrl);
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
+    console.log(fetchedCountryData);
     if (!isCountriesLoading) {
-      const newCountries = fetchedCountryData.countries.map((item) => {
-        return { value: item.iso2, label: item.name };
+      const newCountries = fetchedCountryData.map((item) => {
+        return { value: item, label: item };
       });
-      newCountries.unshift({ value: "global", label: "Global" });
+      // newCountries.unshift({ value: "global", label: "Global" });
       setCountries(newCountries);
     }
   }, [isCountriesLoading]);
