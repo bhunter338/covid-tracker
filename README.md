@@ -3,5 +3,7 @@ A dashboard to track Covid-19 statistics for over 200 countries.
 
 Live Site: https://datatrackercovid19.netlify.app/
 
+Data: https://github.com/bhunter338/Covid-Api
+
 
 
