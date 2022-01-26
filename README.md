@@ -1,9 +1,6 @@
-# Getting Started with Create React App
+# Global Covid-19 Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live Site: https://datatrackercovid19.netlify.app/
 
-## Available Scripts
-
-In the project directory, you can run:
 
 
