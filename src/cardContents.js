@@ -38,14 +38,14 @@ const contents = [
   },
   {
     id: 5,
-    title: "recovered",
+    title: "critical",
     number: "",
     date: today,
     definition: "Number of serious/critical cases of COVID-19",
   },
   {
     id: 6,
-    title: "deaths",
+    title: "infected",
     number: "",
     date: today,
     definition: "Total COVID-19 cases per 1M population",
