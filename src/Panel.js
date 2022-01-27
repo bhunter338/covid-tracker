@@ -2,6 +2,7 @@ import React from "react";
 import TitleBar from "./TitleBar";
 import CardContainer from "./CardContainer";
 import Graph from "./Graph";
+import Footer from "./Footer";
 
 const Panel = () => {
   return (
@@ -9,6 +10,7 @@ const Panel = () => {
       <TitleBar></TitleBar>
       <CardContainer></CardContainer>
       <Graph></Graph>
+      <Footer></Footer>
     </main>
   );
 };

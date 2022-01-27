@@ -128,3 +128,7 @@ h1 {
 .card6 {
   border-bottom: 0.4rem rgb(0, 153, 255) solid;
 }
+
+footer {
+  text-align: center;
+}
