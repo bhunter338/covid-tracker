@@ -32,48 +32,38 @@ const Graph = () => {
     ],
   };
 
-  if (
-    (selectedCountry === "World" || selectedCountry === "") &&
-    !isDailyLoading
-  ) {
-    lineData = {
-      labels: fetchedDailyData.map((item) => item.reportDate),
-      datasets: [
-        {
-          label: "Infected",
-          data: fetchedDailyData.map((item) => item.totalConfirmed),
-          fill: false,
-          backgroundColor: "#269e3a",
-        },
-        {
-          label: "Deaths",
-          data: fetchedDailyData.map((item) => item.deaths.total),
-          fill: true,
-          backgroundColor: "#c91212",
-        },
-      ],
-    };
-  }
-
   console.log(isLoading, chartData);
 
   if (isLoading || isDailyLoading) {
     return <h1>Loading...</h1>;
-  } else if (!(selectedCountry === "World" || selectedCountry === "")) {
-    return (
-      <div className="graph">
-        <Bar
-          data={chartData}
-          // height={"50%"}
-          options={{
-            responsive: true,
-            plugins: { legend: { display: false } },
-            maintainAspectRatio: false,
-          }}
-        ></Bar>
-      </div>
-    );
-  } else {
+  }
+  // else if (!(selectedCountry === "World" || selectedCountry === "")) {
+  //   return (
+  //     <div className="graph">
+  //       <Bar
+  //         data={chartData}
+  //         // height={"50%"}
+  //         options={{
+  //           responsive: true,
+  //           plugins: { legend: { display: false } },
+  //           maintainAspectRatio: false,
+  //         }}
+  //       ></Bar>
+  //     </div>
+  //   );
+  // }
+  else {
+    lineData = {
+      labels: fetchedDailyData.map((item) => item.date.split("T")[0]),
+      datasets: [
+        {
+          label: "Active Cases",
+          data: fetchedDailyData.map((item) => item.activeCases),
+          fill: true,
+          backgroundColor: "#269e3a",
+        },
+      ],
+    };
     return (
       <div className="graph">
         <Line
